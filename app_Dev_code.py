@@ -89,7 +89,7 @@ def get_groq_api_key() -> str:
 
 
 # ----------------------------------------------------------------------------
-# Knowledge base loading (auto, no user interaction)
+# Knowledge base loading
 # ----------------------------------------------------------------------------
 @st.cache_resource(show_spinner=False)
 def get_embeddings():
@@ -216,7 +216,7 @@ def build_rag_chain(_vectorstore, groq_api_key, model_name, vendor_name):
 
 
 # ----------------------------------------------------------------------------
-# Streamlit UI — end users can ONLY chat. No setup, no keys, no uploads.
+# Streamlit UI 
 # ----------------------------------------------------------------------------
 st.set_page_config(page_title=f"{VENDOR_NAME} Course Bot", page_icon="🎓", layout="centered")
 
@@ -302,7 +302,7 @@ if user_input:
             answer = result["answer"]
             st.markdown(answer)
 
-            with st.expander("📚 Sources used"):
+            with st.expander("Sources used"):
                 seen = set()
                 for doc in result.get("context", []):
                     src = doc.metadata.get("source", doc.metadata.get("title", "unknown"))
