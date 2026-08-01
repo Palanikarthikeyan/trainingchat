@@ -1,28 +1,3 @@
-"""
-build_index.py — run this LOCALLY (once, and again whenever course content
-changes) to pre-build the FAISS knowledge index before deploying app.py.
-
-WHY
----
-Without this, the deployed app scrapes the vendor website live every time
-it wakes up from sleep on Streamlit Community Cloud — slower for the first
-visitor, and it fails if the website happens to be down at that moment.
-Pre-building the index here and committing the result means the deployed
-app just loads a file — fast, and independent of the live site's uptime.
-
-USAGE
------
-    pip install -r requirements.txt
-    python build_index.py
-
-This creates a `faiss_index/` folder. Commit it to your git repo alongside
-app.py, requirements.txt, and (optionally) a `knowledge/` folder of extra
-PDFs/notes.
-
-IMPORTANT: Keep KNOWLEDGE_URLS and KNOWLEDGE_FOLDER below identical to the
-CONFIG section at the top of app.py, or the index won't match what you
-think you deployed.
-"""
 
 import os
 
@@ -99,7 +74,7 @@ def main():
     vectorstore = FAISS.from_documents(chunks, embeddings)
     vectorstore.save_local(FAISS_INDEX_DIR)
 
-    print(f"\n✅ Saved index to '{FAISS_INDEX_DIR}/'.")
+    print(f"\n Saved index to '{FAISS_INDEX_DIR}/'.")
     print("Commit this folder to your git repo, then push and deploy/redeploy.")
 
 
